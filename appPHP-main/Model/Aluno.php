@@ -5,15 +5,16 @@ namespace App\Model;
 use App\DAO\AlunoDAO;
 use Exception;
 
-final class Aluno extends Model{
+final class Aluno extends Model
+{
     public ?int $Id = null;
 
-    public ?string $nome
+    public ?string $Nome
     {
         set
         {
             if(strlen($value) < 3)
-                throw new Exception("Nome deve ter no minimo 3 caracteres");
+                throw new Exception("Nome deve ter no mínimo 3 caracteres.");
 
             $this->Nome = $value;
         }
@@ -34,12 +35,13 @@ final class Aluno extends Model{
         get => $this->RA ?? null;
     }
 
+
     public ?string $Curso
     {
         set
         {
             if(strlen($value) < 3)
-                throw("Curso deve ter no minimo 3 caracteres");
+                throw new Exception("Curso deve ter no mínimo 3 caracteres.");
 
             $this->Curso = $value;
         }
@@ -59,17 +61,13 @@ final class Aluno extends Model{
 
     function getAllRows() : array
     {
-        $this->rows = new AlunoDAO() -> select();
+        $this->rows = new AlunoDAO()->select();
 
         return $this->rows;
     }
 
     function delete(int $id) : bool
     {
-        return new AlunoDAO() -> delete($id);
+        return new AlunoDAO()->delete($id);
     }
-
-
 }
-
-?>
